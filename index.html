@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcomExpress — Sign In</title>
+  <meta name="description" content="EcomExpress — Track your shipments instantly with real-time updates and professional logistics tracking.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <div class="bg-pattern"></div>
+  <div class="floating-shapes">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="login-wrapper">
+    <div class="login-card">
+      <div class="logo-container">
+        <div class="logo-icon">
+          <i class="fas fa-shipping-fast"></i>
+        </div>
+        <div class="logo-text">EcomExpress</div>
+        <p class="tagline">Track your shipments instantly</p>
+      </div>
+
+      <div class="login-divider"></div>
+
+      <button id="googleSignInBtn" class="google-btn">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+        Sign in with Google
+      </button>
+
+      <p class="login-footer">
+        Secure authentication powered by Google.<br>
+        Your data is protected and encrypted.
+      </p>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <!-- Firebase Modular SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+
+    // Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyA4XAze8F0Bl0amwjhqBU0fqzsvdKlUuv8",
+      authDomain: "shiping-92aba.firebaseapp.com",
+      projectId: "shiping-92aba",
+      storageBucket: "shiping-92aba.firebasestorage.app",
+      messagingSenderId: "582321037266",
+      appId: "1:582321037266:web:d8f0e492687f319027f20b"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    // Check if user already logged in
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        window.location.href = 'dashboard.html';
+      }
+    });
+
+    // Google Sign-In
+    document.getElementById('googleSignInBtn').addEventListener('click', () => {
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          showToast('Welcome, ' + result.user.displayName + '!');
+          setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
+        })
+        .catch((error) => {
+          console.error('Sign-in error:', error);
+          showToast('Sign-in failed. Please try again.');
+        });
+    });
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
+  </script>
+</body>
+</html>

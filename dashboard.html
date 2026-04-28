@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcomExpress — Shipment Tracking Dashboard</title>
+  <meta name="description"
+    content="Track your EcomExpress shipments in real-time. Enter your tracking ID for instant updates.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+  <div class="bg-pattern"></div>
+  <div class="floating-shapes">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <div class="nav-logo">
+        <div class="nav-logo-icon"><i class="fas fa-shipping-fast"></i></div>
+        <span class="nav-logo-text">EcomExpress</span>
+      </div>
+      <div class="nav-right">
+        <div class="user-info">
+          <img id="userAvatar" class="user-avatar" src="" alt="User">
+          <span id="userName" class="user-name"></span>
+        </div>
+        <button id="logoutBtn" class="logout-btn">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Search Section -->
+  <section class="hero-section">
+    <p class="welcome-greeting" id="welcomeGreeting">👋 Welcome back!</p>
+    <h1 class="hero-title">Shipment Tracking</h1>
+    <p class="hero-subtitle">Enter your tracking ID to get real-time shipment updates</p>
+
+    <div class="search-box">
+      <input type="text" id="trackingInput" class="search-input" placeholder="Enter Tracking ID (e.g. EC123456)"
+        autocomplete="off">
+      <button id="searchBtn" class="search-btn">
+        <i class="fas fa-search"></i>
+        Track
+      </button>
+    </div>
+
+  </section>
+
+  <!-- Stats Row -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-icon blue"><i class="fas fa-box"></i></div>
+      <div class="stat-number">12,450+</div>
+      <div class="stat-label">Packages Delivered</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon green"><i class="fas fa-map-marker-alt"></i></div>
+      <div class="stat-number">380+</div>
+      <div class="stat-label">Cities Covered</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon amber"><i class="fas fa-truck"></i></div>
+      <div class="stat-number">99.2%</div>
+      <div class="stat-label">On-Time Rate</div>
+    </div>
+  </div>
+
+  <!-- Loader -->
+  <div class="loader-wrapper" id="loader">
+    <div class="loader"></div>
+    <span class="loader-text">Tracking shipment…</span>
+  </div>
+
+  <!-- Result Container -->
+  <div class="result-container" id="resultContainer"></div>
+
+
+  <!-- Toast -->
+  <div id="toast" class="toast"></div>
+
+  <!-- Firebase + App Logic (Modular SDK) -->
+  <script type="module" src="script.js"></script>
+</body>
+
+</html>
